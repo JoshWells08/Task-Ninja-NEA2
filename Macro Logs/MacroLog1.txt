@@ -1,0 +1,36 @@
+cl(1152,340)
+cl(1152,340)
+cl(1152,340)
+cl(1152,340)
+cl(1152,341)
+cl(1152,341)
+cl(1152,341)
+cl(1152,341)
+cl(1152,341)
+cl(1152,341)
+cl(1762,697)
+cl(1762,697)
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'j'
+released 'j'
+pressed 'i'
+released 'i'
+pressed 'o'
+released 'o'
+cl(1491,278)
+cl(1491,278)
