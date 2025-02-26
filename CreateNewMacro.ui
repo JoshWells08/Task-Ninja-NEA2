@@ -22,7 +22,7 @@
      <rect>
       <x>60</x>
       <y>20</y>
-      <width>361</width>
+      <width>331</width>
       <height>61</height>
      </rect>
     </property>
@@ -35,7 +35,7 @@
      <rect>
       <x>60</x>
       <y>100</y>
-      <width>361</width>
+      <width>331</width>
       <height>61</height>
      </rect>
     </property>
@@ -48,7 +48,7 @@
      <rect>
       <x>60</x>
       <y>180</y>
-      <width>361</width>
+      <width>331</width>
       <height>61</height>
      </rect>
     </property>
@@ -61,7 +61,7 @@
      <rect>
       <x>60</x>
       <y>260</y>
-      <width>361</width>
+      <width>331</width>
       <height>61</height>
      </rect>
     </property>
@@ -74,7 +74,7 @@
      <rect>
       <x>60</x>
       <y>340</y>
-      <width>361</width>
+      <width>331</width>
       <height>61</height>
      </rect>
     </property>
@@ -109,22 +109,6 @@
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="BackgroundLabel">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>50</y>
-      <width>791</width>
-      <height>411</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../.designer/backup/images/blue background.PNG</pixmap>
     </property>
    </widget>
    <widget class="QScrollArea" name="UserLogArea">
@@ -168,7 +152,7 @@
      <rect>
       <x>500</x>
       <y>20</y>
-      <width>261</width>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -189,7 +173,45 @@
      <string>press here to stop recording </string>
     </property>
    </widget>
-   <zorder>BackgroundLabel</zorder>
+   <widget class="QPushButton" name="ChangeNameButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>150</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>name</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OverwriteButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>190</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>overwrite</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddInputsButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>230</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add Inputs</string>
+    </property>
+   </widget>
    <zorder>MacroSlot1</zorder>
    <zorder>MacroSlot3</zorder>
    <zorder>MacroLog4</zorder>
@@ -200,6 +222,9 @@
    <zorder>UserLogArea</zorder>
    <zorder>RecordingNotRecording</zorder>
    <zorder>StopRecordingButton</zorder>
+   <zorder>ChangeNameButton</zorder>
+   <zorder>OverwriteButton</zorder>
+   <zorder>AddInputsButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
