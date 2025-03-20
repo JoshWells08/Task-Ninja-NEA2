@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>449</height>
+    <width>932</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,7 @@
      <string>Unnamed Macro 3</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="MacroLog4">
+   <widget class="QPushButton" name="MacroSlot4">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -82,40 +82,11 @@
      <string>Unnamed Macro 5</string>
     </property>
    </widget>
-   <widget class="QLabel" name="UserLogBackground">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>20</y>
-      <width>261</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../.designer/backup/images/white background.PNG</pixmap>
-    </property>
-   </widget>
-   <widget class="QScrollBar" name="UserLogScrollBar">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>60</y>
-      <width>20</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
    <widget class="QScrollArea" name="UserLogArea">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>60</y>
+      <x>410</x>
+      <y>100</y>
       <width>261</width>
       <height>281</height>
      </rect>
@@ -132,17 +103,17 @@
        <height>279</height>
       </rect>
      </property>
-     <widget class="QLabel" name="UserLog">
+     <widget class="QScrollBar" name="UserLogScrollBar">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>240</x>
         <y>0</y>
-        <width>261</width>
-        <height>381</height>
+        <width>20</width>
+        <height>281</height>
        </rect>
       </property>
-      <property name="text">
-       <string/>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
      </widget>
     </widget>
@@ -150,8 +121,8 @@
    <widget class="QLabel" name="RecordingNotRecording">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>20</y>
+      <x>760</x>
+      <y>200</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -163,9 +134,9 @@
    <widget class="QPushButton" name="StopRecordingButton">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>340</y>
-      <width>261</width>
+      <x>680</x>
+      <y>240</y>
+      <width>231</width>
       <height>61</height>
      </rect>
     </property>
@@ -173,25 +144,12 @@
      <string>press here to stop recording </string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ChangeNameButton">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>150</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>name</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="OverwriteButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>190</y>
-      <width>81</width>
+      <x>680</x>
+      <y>110</y>
+      <width>231</width>
       <height>31</height>
      </rect>
     </property>
@@ -199,12 +157,74 @@
      <string>overwrite</string>
     </property>
    </widget>
+   <widget class="QLabel" name="MacroSelectedLabelTitle">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>20</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Macro Selected:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="MacroSelectedLabel">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>20</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Selected Macro</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ChangeNameButton">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>20</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rename</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewNameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>60</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NewNameEnter">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>enter</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="AddInputsButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>230</y>
-      <width>81</width>
+      <x>680</x>
+      <y>160</y>
+      <width>231</width>
       <height>31</height>
      </rect>
     </property>
@@ -212,26 +232,42 @@
      <string>Add Inputs</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="MenuReturn1">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>320</y>
+      <width>231</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Return To Main Menu</string>
+    </property>
+   </widget>
+   <zorder>MacroSlot4</zorder>
    <zorder>MacroSlot1</zorder>
    <zorder>MacroSlot3</zorder>
-   <zorder>MacroLog4</zorder>
    <zorder>MacroSlot5</zorder>
-   <zorder>UserLogBackground</zorder>
    <zorder>MacroSlot2</zorder>
-   <zorder>UserLogScrollBar</zorder>
    <zorder>UserLogArea</zorder>
    <zorder>RecordingNotRecording</zorder>
    <zorder>StopRecordingButton</zorder>
-   <zorder>ChangeNameButton</zorder>
    <zorder>OverwriteButton</zorder>
+   <zorder>MacroSelectedLabelTitle</zorder>
+   <zorder>MacroSelectedLabel</zorder>
+   <zorder>ChangeNameButton</zorder>
+   <zorder>NewNameLineEdit</zorder>
+   <zorder>NewNameEnter</zorder>
    <zorder>AddInputsButton</zorder>
+   <zorder>MenuReturn1</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>932</width>
      <height>18</height>
     </rect>
    </property>
