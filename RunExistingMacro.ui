@@ -219,14 +219,14 @@
    <widget class="QDial" name="speedDial">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>210</y>
-      <width>50</width>
-      <height>64</height>
+      <x>750</x>
+      <y>180</y>
+      <width>81</width>
+      <height>111</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="speedLabel">
     <property name="geometry">
      <rect>
       <x>720</x>

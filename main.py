@@ -1,4 +1,4 @@
-import sys, time, threading, csv, os
+import sys, time, threading, csv, datetime
 
 from pynput.keyboard import Controller as keyboardController, Listener as keyboardListener,  Key
 from pynput.mouse import Controller as mouseController, Listener as mouseListener, Button
@@ -7,7 +7,7 @@ from pynput.mouse import Controller as mouseController, Listener as mouseListene
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, \
     QLabel, QTextBrowser, QComboBox, QListWidget, QProgressBar, QMessageBox, QDialogButtonBox, \
-    QScrollBar, QScrollArea, QLineEdit, QCheckBox, QDial
+    QScrollBar, QScrollArea, QLineEdit, QCheckBox, QDial, QCalendarWidget
 from PyQt5 import uic
 from datetime import datetime 
 
@@ -16,16 +16,17 @@ filehandler = 'placeholder'
 mouse = mouseController()
 keyboard = keyboardController()
 includeMovement = True
-setDelays = False
-setDelayValue = 0
-oldtime= time.time()
+setDelays = True
+selectedMacroPosition = 1
+
 skipnext = False
 HotKeyPressed = False
-hotkey = 'h'
+
 timesToRunNum = 1
 limitedRunTimes = True
+speedValue = 20
 
-specialKeys = {Key.space:' '}
+
 
 class UI(QMainWindow):
    
@@ -190,8 +191,13 @@ class UI(QMainWindow):
 
       self.timesToRun = self.findChild(QLineEdit,'timesToRun')
       self.runUntilStoppedBox = self.findChild(QCheckBox,'runUntilStoppedBox')
+      self.scheduleTasksButton = self.findChild(QPushButton,'scheduleButton')
 
-      self.speedDial = self.findChild(QSpe)
+      self.speedDial = self.findChild(QDial,'speedDial')
+      
+
+      self.speedLabel = self.findChild(QLabel,'speedLabel')
+      
 
       self.show() #display widgets
 
@@ -203,21 +209,62 @@ class UI(QMainWindow):
       self.RunMacroSlot4.clicked.connect(lambda: self.RunMacroSlot_Clicked(4))
       self.RunMacroSlot5.clicked.connect(lambda: self.RunMacroSlot_Clicked(5))
 
+      
+      self.scheduleTasksButton.clicked.connect(self.STB_Clicked)
       self.RunMacroButton.clicked.connect(self.RunMacro)
 
-      #self.UserLogScrollBar.sliderMoved.connect(self.UserLogScrollBar_Scrolled)
+      self.speedDial.valueChanged.connect(self.Dial_Turned)
 
-   def RunMacro(self):
-      global HotKeyPressed
+      #self.UserLogScrollBar.sliderMoved.connect(self.UserLogScrollBar_Scrolled)
+   def STB_Clicked(self):
+
+      global limitedRunTimes
+      limitedRunTimes = not(self.runUntilStoppedBox.checkState())
+
+      global timesToRunNum
       try:
          timesToRunNum = int(self.timesToRun.text()) 
          #print(timesToRunNum,'odskfkdko')
       except ValueError:
          print('value error ')
+         timesToRunNum = 1
+
+      uic.loadUi('scheduleTasks.ui',self)
+
+      '''initialise widgets'''
+
+      self.secondsLineEdit = self.findChild(QLineEdit,'secondsLineEdit')
+      self.minutesLineEdit = self.findChild(QLineEdit,'minutesLineEdit')
+      self.hoursLineEdit = self.findChild(QLineEdit,'hoursLineEdit')
+
+      self.calendar = self.findChild(QCalendarWidget,'calendarWidget')
+
+      self.runInButton = self.findChild(QPushButton,'runInButton')
+
+      '''set event handlers '''
+
+      self.runInButton.clicked.connect(self.runInButton_Clicked)
+
+   def runInButton_Clicked(self):
+      seconds = 0
+      minutes = 0
+      hours = 0 
+      try:
+         seconds = int(self.secondsLineEdit.text())  
+         minutes = int(self.minutesLineEdit.text())
+         hours = int(self.hoursLineEdit.text()) 
+      except ValueError:
+         print(f'ERROR, line edits cant be cast to int, value error ')
+      seconds = seconds + (60*minutes) + (3600*hours)
       
-      limitedRunTimes = not(self.runUntilStoppedBox.checkState())
+      print(self.calendar.selectedDate().day())
+
+      if self.calendar.selectedDate().day() == time.localtime().tm_mday:
+         time.sleep(seconds)
+
+      global HotKeyPressed
       
-      time.sleep(1)
+      
       f = open(f'C:\\Users\\jishjosh08\\Task-Ninja-NEA\\Macro Logs\\MacroLog{selectedMacroPosition}.txt', 'r')
       if limitedRunTimes:
          for i in range(0,timesToRunNum,1): 
@@ -225,7 +272,10 @@ class UI(QMainWindow):
                f = open(f'C:\\Users\\jishjosh08\\Task-Ninja-NEA\\Macro Logs\\MacroLog{selectedMacroPosition}.txt', 'r')
                for line in f:
                   if setDelays:
-                     time.sleep(setDelayValue)
+                     if speedValue != 0:
+                        time.sleep(1/(100*speedValue))
+                     else:
+                        time.sleep(1/10)
                   if not HotKeyPressed:
                      executeMacroLine(findType(line)[0],findType(line)[1] )
                f.close()      
@@ -235,7 +285,55 @@ class UI(QMainWindow):
             for line in f:
                if not HotKeyPressed:
                   if setDelays:
-                     time.sleep(setDelayValue)
+                     if speedValue != 0:
+                        time.sleep(1/(100*speedValue))
+                     else:
+                        time.sleep(1/10)
+                  if not HotKeyPressed:
+                     executeMacroLine(findType(line)[0],findType(line)[1] )
+            f.close()
+      HotKeyPressed = False
+      
+
+      
+
+   def RunMacro(self):
+
+      global HotKeyPressed
+      try:
+         timesToRunNum = int(self.timesToRun.text()) 
+         #print(timesToRunNum,'odskfkdko')
+      except ValueError:
+         print('value error ')
+         timesToRunNum = 1
+      
+      limitedRunTimes = not(self.runUntilStoppedBox.checkState())
+      
+      
+      f = open(f'C:\\Users\\jishjosh08\\Task-Ninja-NEA\\Macro Logs\\MacroLog{selectedMacroPosition}.txt', 'r')
+      if limitedRunTimes:
+         for i in range(0,timesToRunNum,1): 
+            if not(HotKeyPressed):
+               f = open(f'C:\\Users\\jishjosh08\\Task-Ninja-NEA\\Macro Logs\\MacroLog{selectedMacroPosition}.txt', 'r')
+               for line in f:
+                  if setDelays:
+                     if speedValue != 0:
+                        time.sleep(1/(100*speedValue))
+                     else:
+                        time.sleep(1/10)
+                  if not HotKeyPressed:
+                     executeMacroLine(findType(line)[0],findType(line)[1] )
+               f.close()      
+      else: 
+         while not HotKeyPressed:
+            f = open(f'C:\\Users\\jishjosh08\\Task-Ninja-NEA\\Macro Logs\\MacroLog{selectedMacroPosition}.txt', 'r')
+            for line in f:
+               if not HotKeyPressed:
+                  if setDelays:
+                     if speedValue != 0:
+                        time.sleep(1/(100*speedValue))
+                     else:
+                        time.sleep(1/10)
                   if not HotKeyPressed:
                      executeMacroLine(findType(line)[0],findType(line)[1] )
             f.close()
@@ -267,7 +365,12 @@ class UI(QMainWindow):
       
       self.RunMacroButton.setHidden(False)
 
-
+   def Dial_Turned(self, value):
+      global speedValue
+      speedValue = value
+      if value != 0:
+         self.speedLabel.setText(f'Speed: {value}')
+   
    
    def RunMacroButton_Clicked(self):
       global timesToRunNum
@@ -334,7 +437,8 @@ class UI(QMainWindow):
    def AddInputsButton_Clicked(self):
 
       global recording 
-
+      global oldtime
+      oldtime = time.time()
       
 
       self.RecordingNotRecording.setText('recording')
@@ -501,12 +605,19 @@ def findType(line):
       
       elif line[0:8] == 'scrolled':
          return['scroll',[line[12],line[19]]]
-      elif 'Key.' in line:
-         isSpecialKey = True
-         return['placeholder','placeholder value ']
       
-      elif line[0:3] == 'pre' and not(isSpecialKey):
-         return['key',line[9]]
+      elif 'pressed Key.' in line:
+        
+         return['pressedkey',line[8:len(line)-1]]
+      elif 'released Key' in line:
+         return['releasedkey',line[8:len(line)-1]]
+      
+      
+      elif line[0:3] == 'pre' :
+         return['pressedkey',line[9]]
+      elif line[0:3] == 'rel':
+         return['releasedkey',line[9]]
+      
       elif line[0] == '(':
          commaPosition = line.find(',')
          finalBracketPosition = line.find(')')
@@ -538,9 +649,15 @@ def executeMacroLine(type, value):
    elif type == 'scroll':
       mouse.scroll(value[0],value[1])
    
-   elif type == 'key':
-      time.sleep(0.1)
-      keyboard.type(value)
+   elif type == 'pressedkey':
+      
+      
+      keyboard.press(value)
+
+   elif type == 'releasedkey':
+      
+      keyboard.release(value)
+
    elif type == 'position':
       mouse.position = (value[0],value[1])
 
