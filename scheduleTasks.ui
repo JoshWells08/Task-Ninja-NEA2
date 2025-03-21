@@ -86,7 +86,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="label3">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -206,3 +206,4 @@
  <resources/>
  <connections/>
 </ui>
+<!---->
